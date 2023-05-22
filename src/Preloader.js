@@ -1,4 +1,22 @@
 import Phaser from 'phaser'
+import red from '../assets/red.png'
+import background from '../assets/background.png'
+import logo from '../assets/logo.png'
+import space3 from '../assets/space3.png'
+import emojis from '../assets/emojis.png'
+import emojisJson from '../assets/emojis.json'
+
+import musicOgg from '../assets/sounds/music.ogg'
+import musicMp3 from '../assets/sounds/music.mp3'
+import musicM4a from '../assets/sounds/music.m4a'
+
+import countdownOgg from '../assets/sounds/countdown.ogg'
+import countdownMp3 from '../assets/sounds/countdown.mp3'
+import countdownM4a from '../assets/sounds/countdown.m4a'
+
+import matchOgg from '../assets/sounds/match.ogg'
+import matchMp3 from '../assets/sounds/match.mp3'
+import matchM4a from '../assets/sounds/match.m4a'
 
 export default class Preloader extends Phaser.Scene {
   constructor() {
@@ -19,20 +37,17 @@ export default class Preloader extends Phaser.Scene {
     this.loadText.setStroke('#203c5b', 6)
     this.loadText.setShadow(2, 2, '#2d2d2d', 4, true, false)
 
-    this.load.setPath('assets/')
-    this.load.image(['red', 'background', 'space3', 'logo'])
-    this.load.atlas('emojis', 'emojis.png', 'emojis.json')
+    this.load.image('red', red)
+    this.load.image('background', background)
+    this.load.image('logo', logo)
+    this.load.image('space3', space3)
+    this.load.atlas('emojis', emojis, emojisJson)
 
     //  Audio ...
-    this.load.setPath('assets/sounds/')
 
-    this.load.audio('music', ['music.ogg', 'music.m4a', 'music.mp3'])
-    this.load.audio('countdown', [
-      'countdown.ogg',
-      'countdown.m4a',
-      'countdown.mp3',
-    ])
-    this.load.audio('match', ['match.ogg', 'match.m4a', 'match.mp3'])
+    this.load.audio('music', [musicOgg, musicM4a, musicMp3])
+    this.load.audio('countdown', [countdownOgg, countdownM4a, countdownMp3])
+    this.load.audio('match', [matchOgg, matchM4a, matchMp3])
   }
 
   create() {
