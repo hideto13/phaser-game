@@ -21,6 +21,8 @@ export default class MainGame extends Phaser.Scene {
 
     this.timer
     this.timerText
+
+    this.back
   }
 
   create() {
@@ -63,17 +65,38 @@ export default class MainGame extends Phaser.Scene {
       },
     }
 
+    const fontBackStyle = {
+      fontFamily: 'Arial',
+      fontSize: 32,
+      color: 'red',
+      fontStyle: 'bold',
+      padding: 16,
+      shadow: {
+        color: 'red',
+        fill: true,
+        offsetX: 2,
+        offsetY: 2,
+        blur: 4,
+      },
+    }
+
     this.timerText = this.add.text(20, 20, '30:00', fontStyle)
     this.scoreText = this.add.text(530, 20, 'Found: 0', fontStyle)
+    this.back = this.add.text(20, 520, 'BACK', fontBackStyle)
+    this.back.setInteractive({ cursor: 'pointer' })
 
     let children = this.emojis.getChildren()
 
     children.forEach(child => {
-      child.setInteractive()
+      child.setInteractive({ cursor: 'pointer' })
     })
 
     this.input.on('gameobjectdown', this.selectEmoji, this)
     this.input.once('pointerdown', this.start, this)
+    this.back.on('pointerdown', () => {
+      this.create()
+      this.scene.start('MainMenu')
+    })
 
     this.highscore = this.registry.get('highscore')
 

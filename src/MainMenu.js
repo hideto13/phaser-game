@@ -1,5 +1,4 @@
 import Phaser from 'phaser'
-
 export default class MainMenu extends Phaser.Scene {
   constructor() {
     super('MainMenu')
@@ -49,6 +48,7 @@ export default class MainMenu extends Phaser.Scene {
     let logo = this.add.image(400, -200, 'logo')
 
     emitter.startFollow(logo)
+    logo.setInteractive({ cursor: 'pointer' })
 
     if (!this.music) {
       this.music = this.sound.play('music', { loop: true })
@@ -61,7 +61,7 @@ export default class MainMenu extends Phaser.Scene {
       duration: 1200,
     })
 
-    this.input.once('pointerdown', () => {
+    logo.on('pointerdown', () => {
       this.scene.start('MainGame')
     })
   }
